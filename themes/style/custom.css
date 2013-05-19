@@ -1,0 +1,11 @@
+.deck-container {
+    font-family: 'Cantarell', sans-serif;
+}
+
+.slide span.code {
+    font-family: 'DroidSans Mono', monospace;
+    border: none;
+    font-size: 0.8em;
+    padding-left: 0;
+    padding-right: 0;
+}

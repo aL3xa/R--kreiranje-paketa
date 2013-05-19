@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <title>R: kreiranje paketa</title>
+
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" href="core/deck.core.css">
+
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" href="extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="extensions/status/deck.status.css">
+    <link rel="stylesheet" href="extensions/hash/deck.hash.css">
+    <link rel="stylesheet" href="extensions/scale/deck.scale.css">
+
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" href="themes/style/swiss.css">
+    <link rel="stylesheet" href="themes/style/custom.css">
+
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" href="themes/transition/fade.css">
+
+    <!-- Required Modernizr file -->
+    <script src="modernizr.custom.js"></script>
+  </head>
+  <body class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <!-- naslovna -->
+    <section class="slide">
+      <h1>R: kreiranje paketa</h1>
+    </section>
+
+    <!-- o meni -->
+    <section class="slide">
+      <h3>o autoru (vanity page)</h3>
+      <h4>Aleksandar Blagotić</h4>
+      <ul>
+        <li>trenutno web-developer / R programer pri <a href="http://rapporter.net/">Rapporter Ltd.</a></li>
+        <li>5+ godina iskustva: R, webdev, GNU/Linux</li>
+        <li>prokrastinacija osnovnih studija psihologije (Level 3 Apsolvent)</li>
+      </ul>
+      <q>kontakt:</q>
+      <ul>
+        <li><a href="mailto:aca.blagotic@gmail.com">mail</a></li>
+        <li><a href="https://plus.google.com/105705293887826322118/about" target="_blank">Google+</a></li>
+	<li><a href="https://twitter.com/acablag" target="_blank">twitter</a></li>
+	<li><a href="http://rs.linkedin.com/pub/aleksandar-blagoti%C4%87/31/409/a05" target="_blank">LinkedIn</a></li>
+      </ul>
+    </section>
+
+    <!-- o R-u -->
+    <section class="slide">
+      <h3>o R-u...</h3>
+      <ul>
+        <li>R je programski jezik za statističku analizu i grafičko prikazivanje podataka</li>
+        <li>
+	  nastao kao open-source implementacija programskog jezika S, Chambers 1976.
+          <ul>
+            <li>geek humor: referenca: programski jezik C</li>
+          </ul>
+	</li>
+        <li>
+	  autori Ross Ihaka, Robert Gentleman
+          <ul>
+            <li>R prema početnim slovima imena autora?</li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- prednosti R-a -->
+    <section class="slide">
+      <h3>prednosti R-a</h3>
+      <ul>
+        <li>open-source</li>
+        <li>cross-platform: dostupan za Linux, Windows i MacOS</li>
+        <li>pragmatičan - pisan je od strane statističara za statističare (što možda i nije tako dobra ideja...)</li>
+        <li>velika korisnička baza: preko 2 miliona korisnika</li>
+        <li>odlične mogućnosti grafičkog prikazivanja podataka</li>
+        <li>odlična dokumentacija</li>
+        <li>
+	  ekstenzibilnost: preko 4.5K paketa na CRAN mreži<br />
+	  <span class="code">length(available.packages()[, 1])</span>
+	</li>
+      </ul>
+    </section>
+
+    <!-- sta je R paket -->
+    <section class="slide">
+      <h3>šta je R paket?</h3>
+      <ul>
+        <li>binarna datoteka: arhiva dokumentovanih R skripti (i još ponešto preko...)</li>
+        <li>add-on/ekstenzija/plugin koji proširuje osnovnu funkcionalnost R-a</li>
+      </ul>
+    </section>
+
+    <!-- CRAN mreža -->
+    <section class="slide">
+      <h3>CRAN mreža</h3>
+      <ul>
+        <li><a href="http://cran.r-project.org/" target="_blank">CRAN: Comprehensive R Archive Network</a></li>
+        <li>mreža repozitorijuma paketa</li>
+        <li>prilagođeni paketi korisnika</li>
+        <li><a href="http://cran.r-project.org/web/views/" target="_blank">CRAN Task View</a></li>
+        <li>
+	  pretraga CRAN paketa/funkcija
+          <ul>
+            <li><a href="http://cran.r-project.org/search.html" target="_blank">http://cran.r-project.org/search.html</a></li>
+            <li>
+	      <span class="code">sos::findFn("<paket>")</span>
+	    </li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- ostale distributivne mreže R paketa -->
+    <section class="slide">
+      <h3>ostale distributivne mreže R paketa</h3>
+      <ul>
+        <li><a href="https://r-forge.r-project.org/" target="_blank">R forge</a></li>
+        <li><a href="http://www.bioconductor.org/install/" target="_blank">Bioconductor</a></li>
+        <li><a href="https://github.com/languages/R" target="_blank">GitHub R language</a></li>
+      </ul>
+    </section>
+
+    <!-- zašto kreirati paket? -->
+    <section class="slide">
+      <h3>zašto kreirati paket?</h3>
+      <img src="img/iYt80kq.jpg" alt="why?" />
+    </section>
+
+    <!-- ne, ozbiljno... zašto? i kada? -->
+    <section class="slide">
+      <h3>ne, ozbiljno... zašto? i kada?</h3>
+      <ul>
+        <li>
+	  kada raspolažete trustom R skripti/funkcija koje:
+          <ul>
+            <li>su namenjene rešavanju konkretnog tipa problema ili se odnose na određenu oblast</li>
+            <li>želeli biste da dokumentujete funkcije koje svakodnevno koristite</li>
+            <li>mislite da bi drugima bile od pomoći</li>
+          </ul>
+	</li>
+        <li>
+	  zašto?
+          <ul>
+            <li>"čitak" kod</li>
+            <li>manje bug-ova</li>
+            <li>efikasnija komunikacija</li>
+            <li>veća produktivnost</li>
+          </ul>
+	</li>
+	<li>prvo pretražite! (među 4500+ paketa naćiće se jedan koji vam treba)</li>
+      </ul>
+    </section>
+
+    <!-- potrebno predznanje -->
+    <section class="slide">
+      <h3>potrebno predznanje</h3>
+      <ul>
+        <li>R, na primer, može biti od koristi...</li>
+        <li><span class="code">LaTeX</span> je dobrodošao pri pisanju dokumentacije</li>
+        <li>poželjno je znati neki od CVS: <span class="code">git</span>, <span class="code">svn</span>, <span class="code">bzr</span></li>
+      </ul>
+    </section>
+
+    <!-- digresija: git -->
+    <section class="slide">
+      <h3>digresija: <span class="code">git</span></h3>
+      <ul>
+        <li>softver za upravljanje izvornim kodom</li>
+        <li>
+	  servisi:
+          <ul>
+            <li><a href="http://github.com/" target="_blank">GitHub</a></li>
+            <li><a href="http://bitbucket.org/" target="_blank">Bitbucket</a></li>
+            <li><a href="http://gitorious.org/" target="_blank">Gitorious</a></li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- git -->
+    <section class="slide">
+      <h3>git</h3>
+      <ul>
+        <li>
+	  osnovne komande:
+          <ul>
+            <li><span class="code">git init</span></li>
+            <li><span class="code">git add</span></li>
+            <li><span class="code">git commit</span></li>
+            <li><span class="code">git push</span></li>
+          </ul>
+	</li>
+        <li>
+	  bitne konfiguracione datoteke:
+          <ul>
+            <li><span class="code">.gitignore</span></li>
+            <li><span class="code">.git/config</span></li>
+          </ul>
+	</li>
+	<li>demonstracija: postaviti paket na neki od <span class="code">git</span> servisa</li>
+      </ul>
+    </section>
+
+    <!-- struktura paketa -->
+    <section class="slide">
+      <h3>struktura paketa</h3>
+      <ul>
+        <li><span class="code">package.skeleton()</span></li>
+        <li>
+	  imati u vidu:
+          <ul>
+            <li>objekte unutar globalnog okruženja: <span class="code">ls()</span></li>
+            <li>pakete i objekte u search path: <span class="code">search()</span></li>
+          </ul>
+	</li>
+        <li>101 funkcija: <span class="code">hello.world()</span></li>
+      </ul>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="slide">
+      <h3><span class="code">DESCRIPTION</span></h3>
+      <ul>
+        <li><a href="http://www.debian.org/doc/debian-policy/ch-controlfields.html" target="_blank">Debian Control File</a>: <span class="code">?read.dcf</span></li>
+        <li>obavezna polja: <span class="code">Package</span>, <span class="code">Version</span>, <span class="code">License</span>, <span class="code">Description</span>, <span class="code">Title</span>, <span class="code">Author</span>, <span class="code">Maintainer</span></li>
+        <li>ASCII, ako nije moguće, onda navesti <span class="code">Encoding</span> (UTF8)</li>
+        <li><span class="code">Author <email></span> / <span class="code">Maintainer <email></span></li>
+        <li>
+	  <span class="code">Depends</span>
+          <ul>
+            <li>nema svrhe navoditi R bez konkretne verzije/SVN revizije</li>
+            <li><span class="code">base</span> paket se uvek koristi</li>
+            <li>za eksterne pakete <span class="code">SystemRequirements</span></li>
+            <li><span class="code">Suggests</span> za pakete koji se nalaze u primerima, testovima ili vinjetama</li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="slide">
+      <h3><span class="code">DESCRIPTION</span></h3>
+      <ul>
+        <li>
+	  neka pravila:
+          <ul>
+            <li>paketi čiji je Namespace potreban da bi se paket učitao sa <span class="code">library()</span> navesti u <span class="code">Imports</span></li>
+            <li>paketi koji su neophodni za učitavanje paketa u <span class="code">Depends</span></li>
+            <li>za uspešno izvršavanje komande <span class="code">R CMD check</span> navesti pakete bilo u <span class="code">Depends</span>, <span class="code">Suggests</span> ili <span class="code">Imports</span></li>
+            <li>za testove, koristiti <span class="code">Suggests</span> ili <span class="code">Enhances</span></li>
+            <li>za pakete potrebne zbog podataka (<span class="code">datasets</span>) ili vinjeta koristiti <span class="code">Suggests</span></li>
+          </ul>
+	</li>
+        <li>
+	  precizno navesti podatke o verzijama paketa:
+          <ul>
+            <li>prilikom pozivanja komande <span class="code">library()</span> proveravaju se zavisnosti verzija paketa (dependencies)</li>
+            <li><span class="code">install.packages()</span> proverava <span class="code">Depends</span>, <span class="code">Imports</span> i <span class="code">Suggests</span> za <span class="code">dependencies = TRUE</span></li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section class="slide">
+      <h3><span class="code">DESCRIPTION</span></h3>
+      <ul>
+        <li><span class="code">URL</span> - linkovi odvojeni <span class="code">,</span> ili <span class="code"> </span></li>
+        <li><span class="code">BugReports</span> - URL prema interfejsu za prijavljivanje grešaka u paketu (bugtracker)</li>
+        <li><span class="code">Collate</span> - redosled učitavanja datoteka (default: C locale)</li>
+        <li><span class="code">LazyData</span> (pre R v2.14 <span class="code">LazyLoad</span>)</li>
+        <li><span class="code">Language</span> - ukoliko dokumentacija nije na engleskom</li>
+        <li><span class="code">License</span>, <span class="code">Copyright</span></li>
+      </ul>
+    </section>
+
+    <!-- ostale bitne datoteke -->
+    <section class="slide">
+      <h3>ostale bitne datoteke</h3>
+      <ul>
+        <li><span class="code">NEWS</span> ili <span class="code">ChangeLog</span> - promene u novim verzijama paketa</li>
+        <li><span class="code">LICENSE</span></li>
+        <li><span class="code">INSTALL</span></li>
+        <li><span class="code">inst/CITATION</span> - <span class="code">bibentry()</span></li>
+        <li><span class="code">README</span></li>
+        <li><span class="code">.Rbuildignore</span></li>
+      </ul>
+    </section>
+
+    <!-- poddirektorijumi -->
+    <section class="slide">
+      <h3>poddirektorijumi</h3>
+      <ul>
+        <li><span class="code">R</span> - za R skripte (koristiti <span class="code">.R</span> ekstenziju)</li>
+        <li><span class="code">man</span> - za dokumentaciju (koristiti <span class="code">roxygen2</span>)</li>
+        <li><span class="code">data</span> - za podatke koji idu uz paket (bilo <span class="code">.rda</span> ili <span class="code">.R</span>)</li>
+        <li><span class="code">demo</span> - skripte koje demonstriraju funkcionalnost paketa <span class="code">demo()</span></li>
+        <li><span class="code">inst</span> - poddirekorijumi će biti prekopirani u instalacioni folder</li>
+        <li><span class="code">src</span> - za C, C++ ili Fortran datoteke</li>
+        <li><span class="code">exec</span> - za izvršne datoteke</li>
+        <li><span class="code">po</span> - za lokalizaciju</li>
+        <li>
+	  <span class="code">vignettes</span> - za vinjete, Sweave je neophodan!
+          <ul>
+            <li>ne koristiti <span class="code">R</span>, <span class="code">data</span>, <span class="code">demo</span>, <span class="code">exec</span>, <span class="code">libs</span>, <span class="code">man</span>, <span class="code">help</span>, <span class="code">html</span> i <span class="code">Meta</span></li>
+            <li>testovi, dodatne datoteke, itd.</li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- dokumentacija -->
+    <section class="slide">
+      <h3>dokumentacija</h3>
+      <ul>
+        <li><span class="code">roxygen2</span> - implementacija doxygen za R: dokumentacija unutar R skripti</li>
+        <li><span class="code">LaTeX</span>-olika sintaksa: <span class="code">\itemize</span>, <span class="code">\enumerate</span>, <span class="code">\emph</span>, <span class="code">\code</span>, <span class="code">\link</span>, itd.</li>
+        <li>izbegavati "ručno" pisanje <span class="code">.Rd</span> datoteka, koristite <span class="code">roxygen</span>!</li>
+        <li><span class="code">##'</span></li>
+      </ul>
+    </section>
+
+    <!-- roxygen -->
+    <section class="slide">
+      <h3>roxygen</h3>
+      <ul>
+        <li><span class="code">@title</span> - prva linija</li>
+        <li>
+	  <span class="code">@description</span> - drugi pasus
+          <ul>
+            <li>ukoliko je izostavljen, <span class="code">roxygen</span> će je zameniti sa <span class="code">@title</span></li>
+          </ul>
+	</li>
+        <li><span class="code">@details</span> - sve od trećeg pasusa pa na dalje</li>
+      </ul>
+    </section>
+
+    <!-- roxygen -->
+    <section class="slide">
+      <h3>roxygen</h3>
+      <ul>
+        <li><span class="code">@param</span> - dokumentacija formalnog argumenta funkcije</li>
+        <li><span class="code">@keywords</span></li>
+        <li><span class="code">@return</span> - opis objekta koji data funkcija "vraća"</li>
+        <li><span class="code">@examples</span> (<span class="code">\dontrun{}</span>)</li>
+        <li><span class="code">@export</span> - da li je funkcija "vidljiva", tj. mogu da je koriste ostali (nije specifična za paket, interna)</li>
+        <li><span class="code">@author Ime Prezime <email@@example.com></span></li>
+      </ul>
+    </section>
+
+    <!-- roxygen -->
+    <section class="slide">
+      <h3>roxygen</h3>
+      <ul>
+        <li><span class="code">@seealso</span></li>
+        <li><span class="code">@references</span></li>
+        <li><span class="code">@aliases</span></li>
+        <li><span class="code">@usage</span> - primeri upotrebe date funkcije</li>
+        <li><span class="code">@method</span>, <span class="code">@S3method</span></li>
+        <li><span class="code">@genericMethods</span> - za S4 klase</li>
+        <li><span class="code">roxygenise()</span></li>
+      </ul>
+    </section>
+
+    <!-- R CMD -->
+    <section class="slide">
+      <h3>R CMD</h3>
+      <ul>
+        <li>build</li>
+        <li>
+	  check
+          <ul>
+            <li><span class="code">--as-cran</span> za kompatibilnost sa CRAN konvencijama</li>
+          </ul>
+	</li>
+        <li>install</li>
+        <li>voditi računa o <span class="code">.Rprofile</span> (<span class="code">--vanilla</span>)</li>
+      </ul>
+    </section>
+
+    <!-- TDD -->
+    <section class="slide">
+      <h3>Test Driven Development</h3>
+      <ul>
+        <li>pišite testove!!!</li>
+        <li><span class="code">install.package('testthat')</span></li>
+        <li><span class="code">inst/tests</span></li>
+        <li><span class="code">context()</span></li>
+        <li><span class="code">test_that()</span></li>
+        <li><span class="code">expect_that()</span></li>
+        <li><span class="code">test_file()</span></li>
+        <li><span class="code">test_dir()</span></li>
+      </ul>
+    </section>
+
+    <!-- devtools -->
+    <section class="slide">
+      <h3>devtools</h3>
+      <ul>
+        <li>sadrži funkcije koje pomažu razvoj paketa</li>
+        <li>autor Hadley Wickham - garancija kvaliteta :-)</li>
+        <li>
+	  korisne funkcije
+          <ul>
+            <li><span class="code">install_github/</span></li>
+            <li><span class="code">load_all()</span></li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- linkovi -->
+    <section class="slide">
+      <h3>linkovi</h3>
+      <ul>
+        <li><a href="http://cran.r-project.org/doc/manuals/R-exts.html" target="_blank">Writing R extensions</a></li>
+        <li><a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf" target="_blank">Creating R Packages: A Tutorial - Friedrich Leisch</a></li>
+        <li><a href="https://github.com/hadley/devtools/wiki/Package-basics" target="_blank">devtools wiki</a></li>
+        <li><a href="http://www.rstudio.com/ide/docs/packages/overview" target="_blank">kreiranje paketa uz pomoć Rstudio softvera</a></li>
+	<li>
+	  video
+          <ul>
+            <li><a href="http://www.youtube.com/watch?v=TER-rQoVs0k" target="_blank">Szilard Pafka & Jeroen Ooms - Bay Area RUG</a></li>
+            <li><a href="http://www.youtube.com/watch?v=8-dGf-7arFI" target="_blank">Rory Winston - Melbourne RUG</a></li>
+            <li><a href="http://www.youtube.com/playlist?list=PLF5EBA589570CA2F0" target="_blank">RFunction YouTube kanal</a></li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- ostalo -->
+    <section class="slide">
+      <h3>ostalo</h3>
+      <ul>
+        <li>
+	  korisne alatke:
+          <ul>
+            <li><a href="https://www.gnu.org/software/make/" target="_blank">GNU make</a></li>
+            <li><a href="http://beyondgrep.com/" target="_blank">ack</a></li>
+          </ul>
+	</li>
+        <li>
+	  editori/GUI:
+          <ul>
+            <li><a href="http://ess.r-project.org/" target="_blank">Emacs + ESS</a></li>
+            <li><a href="http://rstudio.com/" target="_blank">Rstudio</a></li>
+            <li><a href="http://marketplace.eclipse.org/content/statet-r" target="_blank">Eclipse + StatET</a></li>
+          </ul>
+	</li>
+        <li>
+	  web:
+          <ul>
+            <li><a href="http://www.r-project.org/mail.html">R mailing list</a></li>
+            <li><a href="http://stackoverflow.com/questions/tagged/r" target="_blank">StackOverflow /r</a></li>
+            <li><a href="http://www.r-bloggers.com/" target="_blank">R-bloggers</a></li>
+            <li><a href="https://plus.google.com/" target="_blank">Google+</a></li>
+          </ul>
+	</li>
+      </ul>
+    </section>
+
+    <!-- the end -->
+    <section class="slide">
+      <h3>hvala na strpljenju!</h3>
+      <img src="img/Cj733f7.jpg" class="" alt="" />
+    </section>
+
+    <!-- pitanja? -->
+    <section class="slide">
+      <h3>kraj</h3>
+      <ul>
+          <li>pitanja?</li>
+      </ul>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+    <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- deck.hash snippet -->
+    <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+    <!-- End extension snippets. -->
+
+
+    <!-- Required JS files. -->
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="core/deck.core.js"></script>
+
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="core/deck.core.js"></script>
+    <script src="extensions/hash/deck.hash.js"></script>
+    <script src="extensions/menu/deck.menu.js"></script>
+    <script src="extensions/goto/deck.goto.js"></script>
+    <script src="extensions/status/deck.status.js"></script>
+    <script src="extensions/navigation/deck.navigation.js"></script>
+    <script src="extensions/scale/deck.scale.js"></script>
+
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+      $(function() {
+      $.deck('.slide');
+      });
+    </script>
+  </body>
+</html>

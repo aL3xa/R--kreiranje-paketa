@@ -1,0 +1,234 @@
+# Kreiranje paketa u R-u
+
+* naslovna
+** R: kreiranje paketa
+   logo R + paket
+* o meni
+** Aleksandar Blagotić
+*** trenutno web-developer / R programer pri Rapporter Ltd.
+*** 5+ godina iskustva: R, webdev, GNU/Linux
+*** prokrastinacija osnovnih studija psihologije (Level 3 Apsolvent)
+*** kontakt
+**** aca.blagotic@gmail.com
+**** https://plus.google.com/105705293887826322118/about
+**** https://twitter.com/acablag
+**** http://rs.linkedin.com/pub/aleksandar-blagoti%C4%87/31/409/a05
+* o R-u
+** R je programski jezik za statističku analizu i grafičko prikazivanje podataka
+** nastao kao open-source implementacija programskog jezika S, Chambers 1976.
+*** geek humor: referenca ka C programskom jeziku
+** autori Ross Ihaka, Robert Gentleman
+*** R prema početnim slovima imena autora?
+* zašto je R bitan?
+** open-source
+** cross-platform: dostupan za Linux, Windows i MacOS
+** pragmatičan - pisan je od strane statističara za statističare
+   što možda i nije tako dobra ideja...
+** velika korisnička baza: preko 2 miliona korisnika
+** odlične mogućnosti grafičkog prikazivanja podataka
+** odlična dokumentacija
+** ekstenzibilnost: preko 4.5K paketa na CRAN mreži
+   length(available.packages()[, 1])
+* šta je R paket?
+** binarna datoteka: arhiva dokumentovanih R skripti (i još ponešto preko...)
+** add-on/ekstenzija/plugin koji proširuje osnovnu funkcionalnost R-a
+* CRAN mreža
+** CRAN: Comprehensive R Archive Network
+   http://cran.r-project.org/
+** mreža repozitorijuma paketa
+** prilagođeni paketi korisnika
+   nema šta nema
+** CRAN Task View
+   http://cran.r-project.org/web/views/
+** pretraga CRAN paketa/funkcija
+*** http://cran.r-project.org/search.html
+*** sos::findFn("<paket>")
+* ostale distributivne mreže R paketa
+** R forge
+   https://r-forge.r-project.org/
+** Bioconductor
+   http://www.bioconductor.org/install/
+** github & the likes
+   https://github.com/languages/R
+* zašto kreirati paket?
+** http://i.imgur.com/iYt80kq.jpg
+* ne, ozbiljno... zašto? i kada?
+** kada raspolažete trustom R skripti/funkcija koje:
+*** su namenjene rešavanju konkretnog tipa problema ili se odnose na određenu oblast
+*** želeli biste da dokumentujete funkcije koje svakodnevno koristite
+*** mislite da bi drugima bile od pomoći
+** zašto?
+*** "čitak" kod
+*** manje bug-ova
+*** efikasnija komunikacija
+*** veća produktivnost
+** prvo pretražite!
+   samo na CRAN mreži postoji preko 4500 paketa, barem jedan ce vam biti od pomoći
+* potrebno predznanje
+** R može biti od koristi...
+** LaTeX je dobrodošao pri pisanju dokumentacije
+** poželjno je znati neki od CVS: git, svn, bzr
+* digresija: git
+** softver za upravljanje izvornim kodom
+** servisi:
+** github
+   http://github.com/
+** bitbucket
+   http://bitbucket.org/
+** gitorious
+   http://gitorious.org/
+* git
+** osnovne komande:
+*** `git init`
+*** `git add`
+*** `git commit`
+*** `git push`
+** bitne konfiguracione datoteke:
+*** `.gitignore`
+*** `.git/config`
+** demonstracija: postaviti paket na neki od servisa
+* struktura paketa
+** `package.skeleton()`
+** imati u vidu:
+*** objekte unutar globalnog okruženja
+    ls()
+*** pakete i objekte u search path
+    search()
+** 101 funkcija?
+   predlozi? hello.world() ili npr. funkcija koja testira oblik distribucije
+* `DESCRIPTION`
+** Debian Control File (`?read.dcf`)
+   http://www.debian.org/doc/debian-policy/ch-controlfields.html
+** obavezna polja: `Package`, `Version`, `License`, `Description`, `Title`, `Author`, `Maintainer`
+** ASCII, ako nije moguće, onda navesti `Encoding` (UTF8)
+** `Author <email>` / `Maintainer <email>`
+** `Depends`
+*** nema svrhe navoditi R bez konkretne verzije/SVN revizije
+*** `base` paket se uvek koristi
+*** za eksterne pakete `SystemRequirements`
+*** `Suggests`
+    za pakete koji se nalaze u primerima, testovima ili vinjetama
+* `DESCRIPTION`
+** neka pravila:
+*** paketi čiji je Namespace potreban da bi se paket učitao sa `library()` navesti u `Imports`
+*** paketi koji su neophodni za učitavanje paketa u `Depends`
+*** za uspešno izvršavanje komande `R CMD check` navesti pakete bilo u `Depends`, `Suggests` ili `Imports`
+*** za testove, koristiti `Suggests` ili `Enhances`
+*** za pakete potrebne zbog podataka (`datasets`) ili vinjeta koristiti `Suggests`
+** precizno navesti podatke o verzijama paketa:
+*** prilikom pozivanja komande `library()` proveravaju se zavisnosti verzija paketa (dependencies)
+*** `install.packages()` proverava `Depends`, `Imports` i `Suggests` za `dependencies = TRUE`
+* `DESCRIPTION`
+** `URL` - linkovi odvojeni `,` ili ` `
+** `BugReports` - URL prema interfejsu za prijavljivanje grešaka u paketu (bugtracker)
+** `Collate` - redosled učitavanja datoteka (default: C locale)
+** `LazyData` (pre R v2.14 `LazyLoad`)
+** `Language` - ukoliko dokumentacija nije na engleskom
+** `License`, `Copyright`
+* ostale bitne datoteke
+** `NEWS` ili `ChangeLog` - promene u novim verzijama paketa
+** `LICENSE`
+** `INSTALL`
+** `inst/CITATION` - `bibentry()`
+** `README`
+** `.Rbuildignore`
+* poddirektorijumi
+** `R` - za R skripte (koristiti `.R` ekstenziju)
+** `man` - za dokumentaciju (koristiti `roxygen2`)
+** `data` - za podatke koji idu uz paket (bilo `.rda` ili `.R`)
+** `demo` - skripte koje demonstriraju funkcionalnost paketa `demo()`
+** `inst` - poddirekorijumi će biti prekopirani u instalacioni folder
+** `src` - za C, C++ ili Fortran datoteke
+** `exec` - za izvršne datoteke
+** `po` - za lokalizaciju
+** `vignettes` - za vinjete, Sweave je neophodan!
+*** ne koristiti `R`, `data`, `demo`, `exec`, `libs`, `man`, `help`, `html` i `Meta`
+*** testovi, dodatne datoteke, itd.
+* dokumentacija
+** `roxygen2` - implementacija doxygen za R: dokumentacija unutar R skripti
+** `LaTeX`-olika sintaksa: `\itemize`, `\enumerate`, `\emph`, `\code`, `\link`, itd.
+** izbegavati "ručno" pisanje `.Rd` datoteka, koristite `roxygen`!
+** `##'`
+* roxygen
+** `@title` - prva linija
+** `@description` - drugi pasus
+*** ukoliko je izostavljen, `roxygen` će je zameniti sa `@title`
+** `@details` - sve od trećeg pasusa pa na dalje
+* roxygen
+** `@param` - dokumentacija formalnog argumenta funkcije
+** `@keywords`
+** `@return` - opis objekta koji data funkcija "vraća"
+** `@examples`
+   `\dontrun{}`
+** `@export` - da li je funkcija "vidljiva", tj. mogu da je koriste ostali (nije specifična za paket, interna)
+** `@author Ime Prezime <email@@example.com>`
+* roxygen
+** `@seealso`
+** `@references`
+** `@aliases`
+** `@usage` - primeri upotrebe date funkcije
+** `@method`, `@S3method`
+** `@genericMethods` - za S4 klase
+** `roxygenise()`
+* R CMD
+** build
+** check
+*** `--as-cran` za kompatibilnost sa CRAN konvencijama
+** install
+** voditi računa o `.Rprofile` (`--vanilla`)
+* Test Driven Development
+** pišite testove!!!
+** `install.package('testthat')`
+** `inst/tests`
+** `context()`
+** `test_that()`
+** `expect_that()`
+** `test_file()`
+** `test_dir()`
+* devtools
+** sadrži funkcije koje pomažu razvoj paketa
+** autor Hadley Wickham - garancija kvaliteta :-)
+** korisne funkcije
+*** `install_github/`
+*** `load_all()`
+* linkovi
+** Writing R extensions
+   http://cran.r-project.org/doc/manuals/R-exts.html
+** Creating R Packages: A Tutorial - Friedrich Leisch
+   http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
+** devtools wiki
+   https://github.com/hadley/devtools/wiki/Package-basics
+** kreiranje paketa uz pomoć Rstudio softvera
+   http://www.rstudio.com/ide/docs/packages/overview
+** video
+*** Szilard Pafka & Jeroen Ooms - Bay Area RUG
+    http://www.youtube.com/watch?v=TER-rQoVs0k
+*** Rory Winston - Melbourne RUG
+    http://www.youtube.com/watch?v=8-dGf-7arFI
+*** RFunction YouTube kanal
+    http://www.youtube.com/playlist?list=PLF5EBA589570CA2F0
+* ostalo
+** korisne alatke
+*** GNU make
+    https://www.gnu.org/software/make/
+*** ack
+    http://beyondgrep.com/
+** editori/GUI
+*** Emacs + ESS
+    http://ess.r-project.org/
+*** Rstudio
+    http://rstudio.com/
+*** Eclipse + StatET
+    http://marketplace.eclipse.org/content/statet-r
+** web
+*** R mailing list
+    http://www.r-project.org/mail.html
+*** StackOverflow /r
+    http://stackoverflow.com/questions/tagged/r
+*** R-bloggers
+    http://www.r-bloggers.com/
+*** Google+
+* kraj
+** hvala na strpljenju!
+   http://i.imgur.com/Cj733f7.jpg
+* pitanja?
